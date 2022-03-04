@@ -57,10 +57,28 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
-<script>
+<script> 
+
+function pressKey(e) {
+  // Press a button, play the audio and attached a class to change it's style
+  const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+  if(!audio) return; // keys not included above would return null, should be excluded manually
+  audio.play();
+  
+  const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+  key.classList.add('playing');
+};
+
+function removeTransition(e) {
+  if(e.propertyName !== 'transform') return;
+  this.classList.remove('playing');
+}
+
+// While the transition end, the className should be removed
+const keys = Array.from(document.querySelectorAll('.key'));
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+window.addEventListener('keydown', pressKey)
 
 </script>
-
-
 </body>
 </html>
