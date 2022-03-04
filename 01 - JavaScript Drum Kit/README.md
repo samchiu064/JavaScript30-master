@@ -22,14 +22,21 @@
 
 ### 觀念釐清
   - DOM level tree: **Window (瀏覽器視窗本身)** > Document > HTML ...
-  - ![DOM Level](https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Using_the_W3C_DOM_Level_1_Core/using_the_w3c_dom_level_1_core-doctree.jpg)
+  - ![DOM Level](https://www.w3schools.com/js/pic_htmltree.gif)
   - 事件綁定可視為 **作用域.addEventListener("事件名稱", 透過此事件要做到的事)**
   - 綁定事件至 window 表示這個事件的作用域是在整個 window (browser) 底下
   - e 和 this 的區別，e => event Object; this => DOM object
 
 ### 疑問
   - Window, Document 及 HTML 有何不同?
+    - Window 為 BOM 中最上層的物件(或稱Level 0 DOM)，代表著瀏覽器本身
+    - Document 為 Window 底下的其中一個節點 (node)，代表著頁面本身
+      - 可透過 document instance of Node 證明
+    - HTML 為 DOM 中的 root element
   - keydown 事件該綁在 window or document?
+    - 需要考慮的面相為 DOM event flow
+    - 在 capture phase 綁在 Window 的事件會先執行，Bubbling phase 則相反
+    ![DOM Event flow](https://i.stack.imgur.com/uKnhJ.png)
   - 為什麼 transitionEvent 會 fire 兩次?  :
     - 因為 transitionend event 是雙向 fired 的
     - 從初始狀態到 transition 完成 (1次)
