@@ -84,7 +84,7 @@
 
     .second-hand {
       background-color: red;
-      transition: 1s;
+      transition: all 1s;
       transition-timing-function: ease-out;
     }
 
@@ -104,6 +104,18 @@
       const secondsDegrees = (360/60) * seconds + 90;
       const minutesDegrees = (360/60) * minutes + 90;
       const hoursDegrees = (360/60) * hours + 90;
+
+      if(seconds === 0) {
+        secondHand.style.transition = 'all 0s';
+      } else {
+        secondHand.style.transition = 'all 1s';
+      }
+
+      if(minutes === 0) {
+        secondHand.style.transition = 'all 0s';
+      } else {
+        secondHand.style.transition = 'all 1s';
+      }
 
       secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
       minHand.style.transform = `rotate(${minutesDegrees}deg)`;
